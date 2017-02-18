@@ -82,10 +82,29 @@ function isAttacked(position, board) {
 
 // view : model -> element
 //
+
+// makeSquare : int * int -> div
+//
+function makeSquare(model, row, col) {
+  let div = document.createElement("div");
+  div.className = "inner";
+  let color = ((row + col) % 2) == 0 ?  "#d0d0d0" : "#7F7F7F";
+  div.style.background = color;
+  if (model.board[row][col] == Queen)
+    div.style.background = "red";
+  return div;
+}
+
+// view : model -> element
+//
 function view(model) {
   let main = document.createElement('div');
   main.className = "main";
-  main.style.backgroundImage = "url('https://unsplash.it/800/?image=1074')";
+  for(let row = 0; row < 8; row++)
+    for(let col = 0; col < 8; col++) {
+      let square = makeSquare(model, row, col);
+      main.appendChild(square);
+    }
   return main;
 }
 
